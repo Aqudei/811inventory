@@ -1,0 +1,17 @@
+[Unit]
+Description=inventory gunicorn daemon
+Requires=inventory.socket
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/811inventory
+ExecStart=/var/www/811inventory/.venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/inventory.sock \
+          _811inventory.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

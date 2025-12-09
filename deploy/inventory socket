@@ -1,0 +1,8 @@
+[Unit]
+Description=inventory gunicorn socket
+
+[Socket]
+ListenStream=/run/inventory.sock
+
+[Install]
+WantedBy=sockets.target
